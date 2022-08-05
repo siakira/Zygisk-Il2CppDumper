@@ -4,6 +4,7 @@
 
 #include "il2cpp_dump.h"
 #include <dlfcn.h>
+#include <stdio.h>
 #include <cstdlib>
 #include <cstring>
 #include <cinttypes>
