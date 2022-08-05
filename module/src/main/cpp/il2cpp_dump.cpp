@@ -350,7 +350,7 @@ void il2cpp_dump(void *handle, char *outDir) {
     il2cpp_handle = handle;
     auto outPath1 = std::string(outDir).append("/files/dump.so");
     std::ofstream outStream1(outPath);
-	fwrite(handle,sizeof(byte student),0x71e8390,outStream1);
+	fwrite(handle,1,0x71e8390,outStream1);
 	outStream1.close();
     init_il2cpp_api();
     if (il2cpp_domain_get_assemblies) {
