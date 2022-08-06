@@ -349,10 +349,7 @@ void il2cpp_dump(void *handle, char *outDir) {
     //initialize
     LOGI("il2cpp_handle: %p", handle);
     il2cpp_handle = handle;
-    auto outPath1 = std::string(outDir).append("/files/dump.so");
-    FILE *fp = fopen(outPath1.c_str(), "w");
-    fwrite(handle,1,0x71e8390,fp);
-    fclose(fp);
+   
     init_il2cpp_api();
     if (il2cpp_domain_get_assemblies) {
         Dl_info dlInfo;
@@ -371,6 +368,10 @@ void il2cpp_dump(void *handle, char *outDir) {
     il2cpp_thread_attach(domain);
     //start dump
     LOGI("dumping...");
+    auto outPath1 = std::string(outDir).append("/files/dump.so");
+    FILE *fp = fopen(outPath1.c_str(), "w");
+    fwrite(handle,sizeof(byte),0x71e8390,fp);
+    fclose(fp);
     size_t size;
     auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
     std::stringstream imageOutput;
