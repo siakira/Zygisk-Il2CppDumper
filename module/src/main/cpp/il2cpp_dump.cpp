@@ -370,7 +370,7 @@ void il2cpp_dump(void *handle, char *outDir) {
     LOGI("dumping...");
     auto outPath1 = std::string(outDir).append("/files/dump.so");
     FILE *fp = fopen(outPath1.c_str(), "w");
-    fwrite(il2cpp_handle,sizeof(byte),0x71e8390,fp);
+    fwrite(il2cpp_handle,1,0x1000,fp);
     fclose(fp);
     size_t size;
     auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
