@@ -118,7 +118,7 @@ std::string get_class_name(Il2CppClass *klass) {
     auto cname = std::string(il2cpp_class_get_name(klass));
     auto pos = cname.rfind('`');
     if(pos > 0) {
-       //std::vector<std::string> extends;
+       std::vector<std::string> extends;
        //auto corlib = il2cpp_get_corlib();
        //auto TypeClass = il2cpp_class_from_name(corlib, "System", "Type");
        //auto TypeGenericArguments = il2cpp_class_get_method_from_name(TypeClass, "GetGenericArguments", 0);
