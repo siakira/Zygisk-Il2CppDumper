@@ -4,7 +4,6 @@
 
 #include "il2cpp_dump.h"
 #include <dlfcn.h>
-#include <stdio.h>
 #include <cstdlib>
 #include <cstring>
 #include <cinttypes>
@@ -259,7 +258,7 @@ std::string dump_field(Il2CppClass *klass) {
         auto field_class = il2cpp_class_from_type(field_type);
         outPut << il2cpp_class_get_name(field_class) << " " << il2cpp_field_get_name(field);
         //TODO 获取构造函数初始化后的字段值
-        if (attrs & FIELD_ATTRIBUTE_LITERAL && is_enum) {
+        if (attrs & FIELD_ATTRIBUTE_LITERAL ) {
             uint64_t val = 0;
             il2cpp_field_static_get_value(field, &val);
             outPut << " = " << std::dec << val;
@@ -349,10 +348,6 @@ void il2cpp_dump(void *handle, char *outDir) {
     //initialize
     LOGI("il2cpp_handle: %p", handle);
     il2cpp_handle = handle;
-    auto outPath1 = std::string(outDir).append("/files/dump.so");
-    FILE *fp = fopen(outPath1, "w");
-    fwrite(handle,1,0x71e8390,fp);
-    fclose(fp);
     init_il2cpp_api();
     if (il2cpp_domain_get_assemblies) {
         Dl_info dlInfo;
@@ -452,4 +447,3 @@ void il2cpp_dump(void *handle, char *outDir) {
     outStream.close();
     LOGI("dump done!");
 }
-
