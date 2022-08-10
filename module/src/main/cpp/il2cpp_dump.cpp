@@ -122,7 +122,7 @@ std::string get_class_name(Il2CppClass *klass) {
        auto TypeClass = il2cpp_class_from_name(corlib, "System", "Type");
        auto TypeGenericArguments = il2cpp_class_get_method_from_name(TypeClass, "GetGenericArguments", 0);
        auto type = il2cpp_class_get_type(klass);
-       typedef Il2CppArray *(*Type_GetGenericArguments_ftn)(void *, void *);
+       typedef Il2CppArray *(*Type_GetGenericArguments_ftn)(Il2CppType *, void *);
        auto reflectionTypes = ((Type_GetGenericArguments_ftn) TypeGenericArguments->methodPointer)(
                     type, nullptr);
        auto items = reflectionTypes->vector;
@@ -135,7 +135,9 @@ std::string get_class_name(Il2CppClass *klass) {
        //    auto param_class = il2cpp_class_from_type(itf);
        //   extends.emplace_back(get_class_name(param_class));
        //}
-       outPut << il2cpp_class_get_name(klass);
+       auto cname = il2cpp_class_get_name(klass);
+       auto pos = imageName.rfind('`');
+       outPut << cname.substr(0, pos);
        outPut << "<";
        if (!extends.empty()) {
          outPut << extends[0];
