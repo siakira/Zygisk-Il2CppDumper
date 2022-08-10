@@ -117,13 +117,25 @@ std::string get_class_name(Il2CppClass *klass) {
     std::stringstream outPut;
     auto cname = std::string(il2cpp_class_get_name(klass));
     auto pos = cname.rfind('`');
-    
     if(pos > 0) {
        std::vector<std::string> extends;
-       while (auto itf = klass->generic_class->context.class_inst->type_argv) {
-          auto param_class = il2cpp_class_from_type(*itf);
-          extends.emplace_back(get_class_name(param_class));
+       auto corlib = il2cpp_get_corlib();
+       auto TypeClass = il2cpp_class_from_name(corlib, "System", "Type");
+       auto TypeGenericArguments = il2cpp_class_get_method_from_name(TypeClass, "GetGenericArguments", 0);
+       auto type = il2cpp_class_get_type(klass);
+       typedef Il2CppArray *(*Type_GetGenericArguments_ftn)(void *, void *);
+       auto reflectionTypes = ((Type_GetGenericArguments_ftn) TypeGenericArguments->methodPointer)(
+                    (void*)type, nullptr);
+       auto items = reflectionTypes->vector;
+       
+       for (int j = 0; j < reflectionTypes->max_length; ++j) {
+	   auto glass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
+	   extends.emplace_back(get_class_name(glass));
        }
+       //while (auto itf = klass->generic_class->context->class_inst->type_argv) {
+       //    auto param_class = il2cpp_class_from_type(itf);
+       //   extends.emplace_back(get_class_name(param_class));
+       //}
        outPut << cname.substr(0, pos);
        outPut << "<";
        if (!extends.empty()) {
@@ -135,7 +147,7 @@ std::string get_class_name(Il2CppClass *klass) {
        outPut << ">";
         
     } else {
-         outPut << cname;
+         outPut << il2cpp_class_get_name(klass);
     }
     
     return outPut.str();	
@@ -226,7 +238,7 @@ std::string dump_property(Il2CppClass *klass) {
             prop_class = il2cpp_class_from_type(param);
         }
         if (prop_class) {
-            outPut << il2cpp_class_get_name(prop_class) << " " << prop_name << " { ";
+            outPut << get_class_name(prop_class) << " " << prop_name << " { ";
             if (get) {
                 outPut << "get; ";
             }
