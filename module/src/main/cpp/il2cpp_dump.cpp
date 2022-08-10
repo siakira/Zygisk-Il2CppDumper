@@ -115,8 +115,10 @@ bool _il2cpp_type_is_byref(const Il2CppType *type) {
 }
 std::string get_class_name(Il2CppClass *klass) {
     std::stringstream outPut;
-    auto is_generic = il2cpp_class_is_generic(klass);
-    if(is_generic) {
+    auto cn = std::string(il2cpp_class_get_name(klass));
+    auto ps = cn.rfind('`');
+    
+    if(ps > 0) {
        auto corlib = il2cpp_get_corlib();
        auto TypeClass = il2cpp_class_from_name(corlib, "System", "Type");
        auto TypeGenericArguments = il2cpp_class_get_method_from_name(TypeClass, "GetGenericArguments", 0);
