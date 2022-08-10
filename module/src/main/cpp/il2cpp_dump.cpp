@@ -113,6 +113,7 @@ bool _il2cpp_type_is_byref(const Il2CppType *type) {
     }
     return byref;
 }
+
 std::string get_class_name(Il2CppClass *klass) {
     std::stringstream outPut;
     auto is_generic = il2cpp_class_is_generic(klass);
@@ -122,12 +123,13 @@ std::string get_class_name(Il2CppClass *klass) {
        auto TypeGenericArguments = il2cpp_class_get_method_from_name(TypeClass, "GetGenericArguments", 0);
        auto type = il2cpp_class_get_type(klass);
        typedef Il2CppArray *(*Type_GetGenericArguments_ftn)(void *, void *);
-       auto reflectionTypes = ((Assembly_GetTypes_ftn) assemblyGetTypes->methodPointer)(
+       auto reflectionTypes = ((*Type_GetGenericArguments_ftn) assemblyGetTypes->methodPointer)(
                     type, nullptr);
        auto items = reflectionTypes->vector;
+       std::vector<std::string> extends;
        for (int j = 0; j < reflectionTypes->max_length; ++j) {
 	   auto glass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
-	   extends.emplace_back(get_class_name(param_class));
+	   extends.emplace_back(get_class_name(glass));
        }
        //while (auto itf = klass->context->class_inst->type_argv) {
        //    auto param_class = il2cpp_class_from_type(itf);
