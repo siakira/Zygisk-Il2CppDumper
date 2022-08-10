@@ -121,7 +121,7 @@ std::string get_class_name(Il2CppClass *klass) {
     if(pos > 0) {
        std::vector<std::string> extends;
        while (auto itf = klass->generic_class->context.class_inst->type_argv) {
-          auto param_class = il2cpp_class_from_type(itf);
+          auto param_class = il2cpp_class_from_type(&itf);
           extends.emplace_back(get_class_name(param_class));
        }
        outPut << cname.substr(0, pos);
