@@ -122,6 +122,7 @@ std::string get_class_name(Il2CppClass* klass) {
            auto param_class = il2cpp_class_from_type(itf);
 	   extends.emplace_back(get_class_name(param_class));
        }
+       outPut << il2cpp_class_get_name(prop_class);
        outPut << "<";
        if (!extends.empty()) {
          outPut << " : " << extends[0];
