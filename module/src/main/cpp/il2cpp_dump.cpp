@@ -118,11 +118,11 @@ bool _il2cpp_type_is_byref(const Il2CppType *type) {
 std::string get_class_name(Il2CppClass* klass) {
     std::stringstream outPut;
     if(il2cpp_class_is_generic(klass)) {
-       while (auto itf = klass->context->class_inst->type_argv) {
-           auto param_class = il2cpp_class_from_type(itf);
-	   extends.emplace_back(get_class_name(param_class));
-       }
-       outPut << il2cpp_class_get_name(klass->parent);
+       //while (auto itf = klass->context->class_inst->type_argv) {
+       //    auto param_class = il2cpp_class_from_type(itf);
+       //   extends.emplace_back(get_class_name(param_class));
+       //}
+       outPut << il2cpp_class_get_name(klass);
        outPut << "<";
        if (!extends.empty()) {
          outPut << " : " << extends[0];
