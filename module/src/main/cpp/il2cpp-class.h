@@ -142,4 +142,94 @@ typedef struct Il2CppArray {
     void *vector[32];
 } Il2CppArray;
 
+typedef union Il2CppRGCTXData
+{
+ void* rgctxDataDummy;
+ const MethodInfo* method;
+ const Il2CppType* type;
+ Il2CppClass* klass;
+} Il2CppRGCTXData;
+
+typedef struct Il2CppGenericInst
+{
+ uint32_t type_argc;
+ const Il2CppType **type_argv;
+} Il2CppGenericInst;
+
+typedef struct Il2CppGenericContext
+{
+ const Il2CppGenericInst *class_inst;
+ const Il2CppGenericInst *method_inst;
+} Il2CppGenericContext;
+
+typedef struct Il2CppGenericClass
+{
+ TypeDefinitionIndex typeDefinitionIndex;
+ Il2CppGenericContext context;
+ Il2CppClass *cached_class;
+} Il2CppGenericClass;
+
+typedef struct Il2CppClass
+{
+ const Il2CppImage* image;
+ void* gc_desc;
+ const char* name;
+ const char* namespaze;
+ const Il2CppType* byval_arg;
+ const Il2CppType* this_arg;
+ Il2CppClass* element_class;
+ Il2CppClass* castClass;
+ Il2CppClass* declaringType;
+ Il2CppClass* parent;
+ Il2CppGenericClass *generic_class;
+ const Il2CppTypeDefinition* typeDefinition;
+ FieldInfo* fields;
+ const EventInfo* events;
+ const PropertyInfo* properties;
+ const MethodInfo** methods;
+ Il2CppClass** nestedTypes;
+ Il2CppClass** implementedInterfaces;
+ VirtualInvokeData* vtable;
+ Il2CppRuntimeInterfaceOffsetPair* interfaceOffsets;
+ void* static_fields;
+ const Il2CppRGCTXData* rgctx_data;
+ struct Il2CppClass** typeHierarchy;
+ uint32_t cctor_started;
+ uint32_t cctor_finished;
+ __attribute__((aligned(8))) uint64_t cctor_thread;
+ GenericContainerIndex genericContainerIndex;
+ CustomAttributeIndex customAttributeIndex;
+ uint32_t instance_size;
+ uint32_t actualSize;
+ uint32_t element_size;
+ int32_t native_size;
+ uint32_t static_fields_size;
+ uint32_t thread_static_fields_size;
+ int32_t thread_static_fields_offset;
+ uint32_t flags;
+ uint32_t token;
+ uint16_t method_count;
+ uint16_t property_count;
+ uint16_t field_count;
+ uint16_t event_count;
+ uint16_t nested_type_count;
+ uint16_t vtable_count;
+ uint16_t interfaces_count;
+ uint16_t interface_offsets_count;
+ uint8_t typeHierarchyDepth;
+ uint8_t rank;
+ uint8_t minimumAlignment;
+ uint8_t packingSize;
+ uint8_t valuetype : 1;
+ uint8_t initialized : 1;
+ uint8_t enumtype : 1;
+ uint8_t is_generic : 1;
+ uint8_t has_references : 1;
+ uint8_t init_pending : 1;
+ uint8_t size_inited : 1;
+ uint8_t has_finalize : 1;
+ uint8_t has_cctor : 1;
+ uint8_t is_blittable : 1;
+ uint8_t is_import_or_windows_runtime : 1;
+} Il2CppClass;
 
