@@ -134,8 +134,8 @@ std::string get_class_name(Il2CppClass *klass) {
        //}
        auto len = klass->generic_class->context.class_inst->type_argc;
        for (int j = 0; j < len; ++j) {
-	    auto param_class = il2cpp_class_from_type(klass->generic_class->context.class_inst->type_argv[j]);
-	    extends.emplace_back(get_class_name(param_class));
+	    //auto param_class = il2cpp_class_from_type(klass->generic_class->context.class_inst->type_argv[j]);
+	    //extends.emplace_back(get_class_name(param_class));
        }
        //while (auto itf = klass->generic_class->context.class_inst->type_argv) {
        //    auto param_class = il2cpp_class_from_type(itf);
