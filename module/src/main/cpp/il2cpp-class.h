@@ -6,6 +6,26 @@ typedef int32_t GenericParameterIndex;
 typedef int16_t GenericParameterConstraintIndex;
 typedef int32_t CustomAttributeIndex;
 typedef char Il2CppNativeChar;
+typedef int32_t TypeIndex;
+typedef int32_t ParameterIndex;
+typedef int32_t MethodIndex;
+typedef int32_t GenericMethodIndex;
+typedef int32_t PropertyIndex;
+typedef int32_t EventIndex;
+typedef int32_t GenericContainerIndex;
+typedef int32_t GenericParameterIndex;
+typedef int16_t GenericParameterConstraintIndex;
+typedef int32_t NestedTypeIndex;
+typedef int32_t InterfacesIndex;
+typedef int32_t VTableIndex;
+typedef int32_t InterfaceOffsetIndex;
+typedef int32_t RGCTXIndex;
+typedef int32_t StringIndex;
+typedef int32_t StringLiteralIndex;
+typedef int32_t GenericInstIndex;
+typedef int32_t ImageIndex;
+typedef int32_t AssemblyIndex;
+typedef int32_t GuidIndex;
 
 
 typedef struct Il2CppMemoryCallbacks Il2CppMemoryCallbacks;
@@ -32,8 +52,8 @@ typedef struct Il2CppManagedMemorySnapshot Il2CppManagedMemorySnapshot;
 typedef struct Il2CppDebuggerTransport Il2CppDebuggerTransport;
 typedef struct Il2CppMethodDebugInfo Il2CppMethodDebugInfo;
 typedef struct Il2CppCustomAttrInfo Il2CppCustomAttrInfo;
-typedef struct Il2CppTypeDefinition;
-typedef struct Il2CppRuntimeInterfaceOffsetPair;
+typedef struct VirtualInvokeData VirtualInvokeData;
+
 typedef const struct ___Il2CppMetadataTypeHandle *Il2CppMetadataTypeHandle;
 typedef const struct ___Il2CppMetadataGenericParameterHandle *Il2CppMetadataGenericParameterHandle;
 
@@ -147,6 +167,50 @@ typedef struct Il2CppArray {
     il2cpp_array_size_t max_length;
     void *vector[32];
 } Il2CppArray;
+
+typedef struct Il2CppRuntimeInterfaceOffsetPair
+{
+ Il2CppClass* interfaceType;
+ int32_t offset;
+} Il2CppRuntimeInterfaceOffsetPair;
+
+typedef struct Il2CppTypeDefinition
+{
+ StringIndex nameIndex;
+ StringIndex namespaceIndex;
+ CustomAttributeIndex customAttributeIndex;
+ TypeIndex byvalTypeIndex;
+ TypeIndex byrefTypeIndex;
+ TypeIndex declaringTypeIndex;
+ TypeIndex parentIndex;
+ TypeIndex elementTypeIndex;
+ RGCTXIndex rgctxStartIndex;
+ int32_t rgctxCount;
+ GenericContainerIndex genericContainerIndex;
+ MethodIndex reversePInvokeWrapperIndex;
+ int32_t marshalingFunctionsIndex;
+ int32_t ccwFunctionIndex;
+ GuidIndex guidIndex;
+ uint32_t flags;
+ FieldIndex fieldStart;
+ MethodIndex methodStart;
+ EventIndex eventStart;
+ PropertyIndex propertyStart;
+ NestedTypeIndex nestedTypesStart;
+ InterfacesIndex interfacesStart;
+ VTableIndex vtableStart;
+ InterfacesIndex interfaceOffsetsStart;
+ uint16_t method_count;
+ uint16_t property_count;
+ uint16_t field_count;
+ uint16_t event_count;
+ uint16_t nested_type_count;
+ uint16_t vtable_count;
+ uint16_t interfaces_count;
+ uint16_t interface_offsets_count;
+ uint32_t bitfield;
+ uint32_t token;
+} Il2CppTypeDefinition;
 
 typedef union Il2CppRGCTXData
 {
