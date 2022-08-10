@@ -1,8 +1,12 @@
 typedef uint16_t Il2CppChar;
 typedef uintptr_t il2cpp_array_size_t;
 typedef int32_t TypeDefinitionIndex;
+typedef int32_t GenericContainerIndex;
 typedef int32_t GenericParameterIndex;
+typedef int16_t GenericParameterConstraintIndex;
+typedef int32_t CustomAttributeIndex;
 typedef char Il2CppNativeChar;
+
 
 typedef struct Il2CppMemoryCallbacks Il2CppMemoryCallbacks;
 typedef struct Il2CppImage Il2CppImage;
