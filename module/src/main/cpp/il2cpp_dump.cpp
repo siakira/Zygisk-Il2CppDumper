@@ -115,6 +115,27 @@ bool _il2cpp_type_is_byref(const Il2CppType *type) {
     return byref;
 }
 
+std::string get_class_name(Il2CppClass* klass) {
+    std::stringstream outPut;
+    if(il2cpp_class_is_generic(klass)) {
+       while (auto itf = klass->context->class_inst->type_argv) {
+           auto param_class = il2cpp_class_from_type(itf);
+	   extends.emplace_back(get_class_name(param_class));
+       }
+       outPut << "<";
+       if (!extends.empty()) {
+         outPut << " : " << extends[0];
+         for (int i = 1; i < extends.size(); ++i) {
+            outPut << ", " << extends[i];
+	 }
+	 outPut << ">";
+    } else {
+       outPut << il2cpp_class_get_name(prop_class);
+    }
+    
+    return outPut.str();	
+}
+    
 std::string dump_method(Il2CppClass *klass) {
     std::stringstream outPut;
     outPut << "\n\t// Methods\n";
@@ -200,7 +221,7 @@ std::string dump_property(Il2CppClass *klass) {
             prop_class = il2cpp_class_from_type(param);
         }
         if (prop_class) {
-            outPut << il2cpp_class_get_name(prop_class) << " " << prop_name << " { ";
+            outPut << get_class_name(prop_class) << " " << prop_name << " { ";
             if (get) {
                 outPut << "get; ";
             }
@@ -257,7 +278,7 @@ std::string dump_field(Il2CppClass *klass) {
         }
         auto field_type = il2cpp_field_get_type(field);
         auto field_class = il2cpp_class_from_type(field_type);
-        outPut << il2cpp_class_get_name(field_class) << " " << il2cpp_field_get_name(field);
+        outPut << get_class_name(field_class) << " " << il2cpp_field_get_name(field);
         //TODO 获取构造函数初始化后的字段值
         if (attrs & FIELD_ATTRIBUTE_LITERAL ) {
             uint64_t val = 0;
@@ -317,7 +338,7 @@ std::string dump_type(const Il2CppType *type) {
     } else {
         outPut << "class ";
     }
-    outPut << il2cpp_class_get_name(klass); //TODO genericContainerIndex
+    outPut << get_class_name(klass); //TODO genericContainerIndex
     std::vector<std::string> extends;
     auto parent = il2cpp_class_get_parent(klass);
     if (!is_valuetype && !is_enum && parent) {
