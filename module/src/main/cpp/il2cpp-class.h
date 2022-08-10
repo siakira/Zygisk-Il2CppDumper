@@ -26,6 +26,7 @@ typedef int32_t GenericInstIndex;
 typedef int32_t ImageIndex;
 typedef int32_t AssemblyIndex;
 typedef int32_t GuidIndex;
+typedef int32_t FieldIndex;
 
 
 typedef struct Il2CppMemoryCallbacks Il2CppMemoryCallbacks;
