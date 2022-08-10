@@ -123,7 +123,7 @@ std::string get_class_name(Il2CppClass *klass) {
        auto TypeGenericArguments = il2cpp_class_get_method_from_name(TypeClass, "GetGenericArguments", 0);
        auto type = il2cpp_class_get_type(klass);
        typedef Il2CppArray *(*Type_GetGenericArguments_ftn)(void *, void *);
-       auto reflectionTypes = ((*Type_GetGenericArguments_ftn) assemblyGetTypes->methodPointer)(
+       auto reflectionTypes = ((Type_GetGenericArguments_ftn) TypeGenericArguments->methodPointer)(
                     type, nullptr);
        auto items = reflectionTypes->vector;
        std::vector<std::string> extends;
