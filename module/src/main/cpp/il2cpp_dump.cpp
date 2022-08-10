@@ -1,3 +1,33 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@siakira 
+siakira
+/
+Zygisk-Il2CppDumper
+Public
+forked from Perfare/Zygisk-Il2CppDumper
+Code
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+Zygisk-Il2CppDumper/module/src/main/cpp/il2cpp_dump.cpp
+@siakira
+siakira Update il2cpp_dump.cpp
+Latest commit 353fb8a 5 days ago
+ History
+ 3 contributors
+@Perfare@siakira@5k1l
+454 lines (437 sloc)  16.1 KB
+
 //
 // Created by Perfare on 2020/7/4.
 //
@@ -115,8 +145,6 @@ bool _il2cpp_type_is_byref(const Il2CppType *type) {
     return byref;
 }
 
-
-    
 std::string dump_method(Il2CppClass *klass) {
     std::stringstream outPut;
     outPut << "\n\t// Methods\n";
@@ -202,7 +230,7 @@ std::string dump_property(Il2CppClass *klass) {
             prop_class = il2cpp_class_from_type(param);
         }
         if (prop_class) {
-            outPut << get_class_name(prop_class) << " " << prop_name << " { ";
+            outPut << il2cpp_class_get_name(prop_class) << " " << prop_name << " { ";
             if (get) {
                 outPut << "get; ";
             }
@@ -259,9 +287,9 @@ std::string dump_field(Il2CppClass *klass) {
         }
         auto field_type = il2cpp_field_get_type(field);
         auto field_class = il2cpp_class_from_type(field_type);
-        outPut << get_class_name(field_class) << " " << il2cpp_field_get_name(field);
+        outPut << il2cpp_class_get_name(field_class) << " " << il2cpp_field_get_name(field);
         //TODO 获取构造函数初始化后的字段值
-        if (attrs & FIELD_ATTRIBUTE_LITERAL ) {
+        if (attrs & FIELD_ATTRIBUTE_LITERAL && is_enum) {
             uint64_t val = 0;
             il2cpp_field_static_get_value(field, &val);
             outPut << " = " << std::dec << val;
@@ -319,7 +347,7 @@ std::string dump_type(const Il2CppType *type) {
     } else {
         outPut << "class ";
     }
-    outPut << get_class_name(klass); //TODO genericContainerIndex
+    outPut << il2cpp_class_get_name(klass); //TODO genericContainerIndex
     std::vector<std::string> extends;
     auto parent = il2cpp_class_get_parent(klass);
     if (!is_valuetype && !is_enum && parent) {
@@ -351,7 +379,10 @@ void il2cpp_dump(void *handle, char *outDir) {
     //initialize
     LOGI("il2cpp_handle: %p", handle);
     il2cpp_handle = handle;
-   
+    auto outPath1 = std::string(outDir).append("/files/dump.so");
+    FILE *fp = fopen(outPath1, "w");
+    fwrite(handle,1,0x71e8390,fp);
+    fclose(fp);
     init_il2cpp_api();
     if (il2cpp_domain_get_assemblies) {
         Dl_info dlInfo;
@@ -370,10 +401,6 @@ void il2cpp_dump(void *handle, char *outDir) {
     il2cpp_thread_attach(domain);
     //start dump
     LOGI("dumping...");
-    auto outPath1 = std::string(outDir).append("/files/dump.so");
-    FILE *fp = fopen(outPath1.c_str(), "w");
-    fwrite(il2cpp_handle,1,0x1000,fp);
-    fclose(fp);
     size_t size;
     auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
     std::stringstream imageOutput;
@@ -455,3 +482,18 @@ void il2cpp_dump(void *handle, char *outDir) {
     outStream.close();
     LOGI("dump done!");
 }
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+You have no unread notifications
