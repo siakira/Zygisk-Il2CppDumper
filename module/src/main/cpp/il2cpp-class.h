@@ -32,6 +32,8 @@ typedef struct Il2CppManagedMemorySnapshot Il2CppManagedMemorySnapshot;
 typedef struct Il2CppDebuggerTransport Il2CppDebuggerTransport;
 typedef struct Il2CppMethodDebugInfo Il2CppMethodDebugInfo;
 typedef struct Il2CppCustomAttrInfo Il2CppCustomAttrInfo;
+typedef struct Il2CppTypeDefinition;
+typedef struct Il2CppRuntimeInterfaceOffsetPair;
 typedef const struct ___Il2CppMetadataTypeHandle *Il2CppMetadataTypeHandle;
 typedef const struct ___Il2CppMetadataGenericParameterHandle *Il2CppMetadataGenericParameterHandle;
 
