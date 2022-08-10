@@ -115,28 +115,7 @@ bool _il2cpp_type_is_byref(const Il2CppType *type) {
     return byref;
 }
 
-std::string get_class_name(Il2CppClass *klass) {
-    std::stringstream outPut;
-    auto is_generic = il2cpp_class_is_generic(klass);
-    if(is_generic) {
-       //while (auto itf = klass->context->class_inst->type_argv) {
-       //    auto param_class = il2cpp_class_from_type(itf);
-       //   extends.emplace_back(get_class_name(param_class));
-       //}
-       outPut << il2cpp_class_get_name(klass);
-       outPut << "<";
-       if (!extends.empty()) {
-         outPut << extends[0];
-         for (int i = 1; i < extends.size(); ++i) {
-            outPut << ", " << extends[i];
-	 }
-	 outPut << ">";
-    } else {
-       outPut << il2cpp_class_get_name(klass);
-    }
-    
-    return outPut.str();	
-}
+
     
 std::string dump_method(Il2CppClass *klass) {
     std::stringstream outPut;
