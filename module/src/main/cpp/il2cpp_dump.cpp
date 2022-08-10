@@ -128,10 +128,10 @@ std::string get_class_name(Il2CppClass *klass) {
                     (void*)type, nullptr);
        auto items = reflectionTypes->vector;
        
-       for (int j = 0; j < reflectionTypes->max_length; ++j) {
-	   auto glass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
-	   extends.emplace_back(get_class_name(glass));
-       }
+       //for (int j = 0; j < reflectionTypes->max_length; ++j) {
+       //   auto glass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
+       //   extends.emplace_back(get_class_name(glass));
+       //}
        //while (auto itf = klass->generic_class->context->class_inst->type_argv) {
        //    auto param_class = il2cpp_class_from_type(itf);
        //   extends.emplace_back(get_class_name(param_class));
