@@ -113,6 +113,40 @@ bool _il2cpp_type_is_byref(const Il2CppType *type) {
     }
     return byref;
 }
+std::string get_class_name(Il2CppClass *klass) {
+    std::stringstream outPut;
+    auto is_generic = il2cpp_class_is_generic(klass);
+    if(is_generic) {
+       auto corlib = il2cpp_get_corlib();
+       auto TypeClass = il2cpp_class_from_name(corlib, "System", "Type");
+       auto TypeGenericArguments = il2cpp_class_get_method_from_name(TypeClass, "GetGenericArguments", 0);
+       auto type = il2cpp_class_get_type(klass);
+       typedef Il2CppArray *(*Type_GetGenericArguments_ftn)(void *, void *);
+       auto reflectionTypes = ((Assembly_GetTypes_ftn) assemblyGetTypes->methodPointer)(
+                    type, nullptr);
+       auto items = reflectionTypes->vector;
+       for (int j = 0; j < reflectionTypes->max_length; ++j) {
+	   auto glass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
+	   extends.emplace_back(get_class_name(param_class));
+       }
+       //while (auto itf = klass->context->class_inst->type_argv) {
+       //    auto param_class = il2cpp_class_from_type(itf);
+       //   extends.emplace_back(get_class_name(param_class));
+       //}
+       outPut << il2cpp_class_get_name(klass);
+       outPut << "<";
+       if (!extends.empty()) {
+         outPut << extends[0];
+         for (int i = 1; i < extends.size(); ++i) {
+            outPut << ", " << extends[i];
+	 }
+	 outPut << ">";
+    } else {
+       outPut << il2cpp_class_get_name(klass);
+    }
+    
+    return outPut.str();	
+}
 
 std::string dump_method(Il2CppClass *klass) {
     std::stringstream outPut;
