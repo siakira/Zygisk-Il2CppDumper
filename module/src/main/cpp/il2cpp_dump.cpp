@@ -133,6 +133,7 @@ std::string get_class_name(Il2CppClass *klass) {
        //   extends.emplace_back(get_class_name(glass));
        //}
        auto len = klass->generic_class->context.class_inst->type_argc;
+       outPut << len;
        for (int j = 0; j < len; ++j) {
 	    //auto param_class = il2cpp_class_from_type(klass->generic_class->context.class_inst->type_argv[j]);
 	    //extends.emplace_back(get_class_name(param_class));
