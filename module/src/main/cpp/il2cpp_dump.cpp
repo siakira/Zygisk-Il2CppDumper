@@ -122,7 +122,7 @@ std::string get_class_name(Il2CppClass *klass) {
        //auto corlib = il2cpp_get_corlib();
        //auto TypeClass = il2cpp_class_from_name(corlib, "System", "Type");
        //auto TypeGenericArguments = il2cpp_class_get_method_from_name(TypeClass, "GetGenericArguments", 0);
-       auto type = il2cpp_class_get_type(klass);
+       auto pType = il2cpp_class_get_type(klass);
        Il2CppGenericInst* pInst = pType->data.generic_class->context.class_inst;
        for (int i = 0; i < pInst->type_argc; ++i)
        {
