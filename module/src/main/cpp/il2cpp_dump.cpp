@@ -113,9 +113,8 @@ bool _il2cpp_type_is_byref(const Il2CppType *type) {
     }
     return byref;
 }
-std::string get_class_name(Il2CppType *ktype) {
+std::string get_class_name(Il2CppClass *klass) {
     std::stringstream outPut;
-    auto klass = il2cpp_class_from_type(ktype);
     auto cname = std::string(il2cpp_class_get_name(klass));
     auto pos = cname.rfind('`');
     if(pos > 0) {
@@ -133,7 +132,7 @@ std::string get_class_name(Il2CppType *ktype) {
        //   auto glass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
        //   extends.emplace_back(get_class_name(glass));
        //}
-       //auto len =  ktype->data.generic_class->context.class_inst->type_argc;
+       auto len =  klass->genericContainerIndex;
        
        //for (int j = 0; j < len; ++j) {
        //    auto param_class = ktype->data.generic_class->context.class_inst->type_argv[j];
@@ -143,9 +142,9 @@ std::string get_class_name(Il2CppType *ktype) {
        //    auto param_class = il2cpp_class_from_type(itf);
        //   extends.emplace_back(get_class_name(param_class));
        //}
-       //outPut << cname.substr(0, pos);
-       //outPut << "<";
-       //outPut << len;
+       outPut << cname.substr(0, pos);
+       outPut << "<";
+       outPut << len;
        outPut << il2cpp_type_get_name(ktype);
        if (!extends.empty()) {
          outPut << extends[0];
@@ -153,7 +152,7 @@ std::string get_class_name(Il2CppType *ktype) {
             outPut << ", " << extends[i];
 	 }
        }
-       //outPut << ">";
+       outPut << ">";
         
     } else {
          outPut << il2cpp_class_get_name(klass);
@@ -247,7 +246,7 @@ std::string dump_property(Il2CppClass *klass) {
             prop_class = il2cpp_class_from_type(prop_type);
         }
         if (prop_class) {
-            outPut << il2cpp_class_get_name(prop_class) << " " << prop_name << " { ";
+            outPut << get_class_name(prop_class) << " " << prop_name << " { ";
             if (get) {
                 outPut << "get; ";
             }
