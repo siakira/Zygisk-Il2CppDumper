@@ -144,7 +144,7 @@ std::string get_class_name(Il2CppClass *klass) {
        //}
        outPut << cname.substr(0, pos);
        outPut << "<";
-       //outPut << len;
+       outPut << len;
        outPut << il2cpp_class_get_name(klass);
        //if (!extends.empty()) {
        //  outPut << extends[0];
