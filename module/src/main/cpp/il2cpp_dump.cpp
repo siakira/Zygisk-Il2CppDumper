@@ -151,7 +151,7 @@ std::string get_class_name(Il2CppClass *klass) {
        //  for (int i = 1; i < extends.size(); ++i) {
         //    outPut << ", " << extends[i];
 	// }
-       }
+       //}
        outPut << ">";
         
     } else {
