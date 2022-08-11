@@ -132,19 +132,19 @@ std::string get_class_name(Il2CppClass *klass) {
        //   auto glass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
        //   extends.emplace_back(get_class_name(glass));
        //}
-       auto len =  klass->generic_class->context.class_inst->type_argc;
+       //auto len =  klass->generic_class->context.class_inst->type_argc;
        
-       for (int j = 0; j < len; ++j) {
-           auto param_class = il2cpp_class_from_type(klass->generic_class->context.class_inst->type_argv[j]);
-           extends.emplace_back(get_class_name(param_class));
-       }
+       //for (int j = 0; j < len; ++j) {
+       //    auto param_class = il2cpp_class_from_type(klass->generic_class->context.class_inst->type_argv[j]);
+        //   extends.emplace_back(get_class_name(param_class));
+      // }
        //while (auto itf = klass->generic_class->context.class_inst->type_argv) {
        //    auto param_class = il2cpp_class_from_type(itf);
        //   extends.emplace_back(get_class_name(param_class));
        //}
        outPut << cname.substr(0, pos);
        outPut << "<";
-       outPut << len;
+       //outPut << len;
        outPut << il2cpp_class_get_name(klass);
        if (!extends.empty()) {
          outPut << extends[0];
