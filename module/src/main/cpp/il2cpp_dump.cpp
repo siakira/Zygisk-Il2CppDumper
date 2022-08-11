@@ -119,20 +119,20 @@ std::string get_class_name(Il2CppClass *klass) {
     auto pos = cname.rfind('`');
     if(pos < cname.length()) {
        std::vector<std::string> extends;
-       //auto corlib = il2cpp_get_corlib();
-       //auto TypeClass = il2cpp_class_from_name(corlib, "System", "Type");
-       //auto TypeGenericArguments = il2cpp_class_get_method_from_name(TypeClass, "GetGenericArguments", 0);
-       //auto type = il2cpp_class_get_type(klass);
-       //typedef Il2CppArray *(*Type_GetGenericArguments_ftn)(void *, void *);
-       //auto reflectionTypes = ((Type_GetGenericArguments_ftn) TypeGenericArguments->methodPointer)(
-       //             (void*)type, nullptr);
-       //auto items = reflectionTypes->vector;
+       auto corlib = il2cpp_get_corlib();
+       auto TypeClass = il2cpp_class_from_name(corlib, "System", "Type");
+       auto TypeGenericArguments = il2cpp_class_get_method_from_name(TypeClass, "GetGenericArguments", 0);
+       auto type = il2cpp_class_get_type(klass);
+       typedef Il2CppArray *(*Type_GetGenericArguments_ftn)(void *, void *);
+       auto reflectionTypes = ((Type_GetGenericArguments_ftn) TypeGenericArguments->methodPointer)(
+                    (void*)type, nullptr);
+       auto items = reflectionTypes->vector;
        
        //for (int j = 0; j < reflectionTypes->max_length; ++j) {
        //   auto glass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
        //   extends.emplace_back(get_class_name(glass));
        //}
-       auto len =  klass->generic_class->context.class_inst->type_argc;
+       //auto len =  klass->generic_class->context.class_inst->type_argc;
        
        //for (int j = 0; j < len; ++j) {
        //    auto param_class = il2cpp_class_from_type(klass->generic_class->context.class_inst->type_argv[j]);
@@ -144,7 +144,7 @@ std::string get_class_name(Il2CppClass *klass) {
        //}
        outPut << cname.substr(0, pos);
        outPut << "<";
-       outPut << std::to_string(len);
+       //outPut << std::to_string(len);
        outPut << il2cpp_class_get_name(klass);
        //if (!extends.empty()) {
        //  outPut << extends[0];
