@@ -115,7 +115,7 @@ bool _il2cpp_type_is_byref(const Il2CppType *type) {
 }
 std::string get_class_name(Il2CppType *ktype) {
     std::stringstream outPut;
-    auto kclass = il2cpp_class_from_type(ktype);
+    auto klass = il2cpp_class_from_type(ktype);
     auto cname = std::string(il2cpp_class_get_name(klass));
     auto pos = cname.rfind('`');
     if(pos > 0) {
@@ -133,10 +133,10 @@ std::string get_class_name(Il2CppType *ktype) {
        //   auto glass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
        //   extends.emplace_back(get_class_name(glass));
        //}
-       auto len =  ktype->data->generic_class->context.class_inst->type_argc;
+       auto len =  ktype->data.generic_class->context.class_inst->type_argc;
        
        for (int j = 0; j < len; ++j) {
-	    auto param_class = il2cpp_class_from_type(ktype->data->generic_class->context.class_inst->type_argv[j];);
+	    auto param_class = il2cpp_class_from_type(ktype->data.generic_class->context.class_inst->type_argv[j];);
 	    extends.emplace_back(get_class_name(param_class));
        }
        //while (auto itf = klass->generic_class->context.class_inst->type_argv) {
@@ -240,11 +240,11 @@ std::string dump_property(Il2CppClass *klass) {
         uint32_t iflags = 0;
         if (get) {
             outPut << get_method_modifier(il2cpp_method_get_flags(get, &iflags));
-	    prop_type = il2cpp_method_get_return_type(get);
+	    prop_type = (Il2CppType *)il2cpp_method_get_return_type(get);
             prop_class = il2cpp_class_from_type(prop_type);
         } else if (set) {
             outPut << get_method_modifier(il2cpp_method_get_flags(set, &iflags));
-            prop_type = il2cpp_method_get_param(set, 0);
+            prop_type = (Il2CppType *)il2cpp_method_get_param(set, 0);
             prop_class = il2cpp_class_from_type(prop_type);
         }
         if (prop_class) {
