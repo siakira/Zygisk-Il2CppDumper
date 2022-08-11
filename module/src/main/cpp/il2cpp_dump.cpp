@@ -240,7 +240,6 @@ std::string dump_property(Il2CppClass *klass) {
         uint32_t iflags = 0;
         if (get) {
             outPut << get_method_modifier(il2cpp_method_get_flags(get, &iflags));
-	    outPut << il2cpp_type_get_name(il2cpp_method_get_return_type(get));
             prop_class = il2cpp_class_from_type(il2cpp_method_get_return_type(get));
         } else if (set) {
             outPut << get_method_modifier(il2cpp_method_get_flags(set, &iflags));
