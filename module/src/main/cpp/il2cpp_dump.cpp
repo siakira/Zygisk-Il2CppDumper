@@ -126,7 +126,7 @@ std::string get_class_name(Il2CppClass *klass) {
        Il2CppGenericInst* pInst = pType->data.generic_class->context.class_inst;
        for (int i = 0; i < pInst->type_argc; ++i)
        {
-	    //pInst->type_argv[i];
+	    auto param_class = il2cpp_class_from_type(pInst->type_argv[i]);
        }
        //typedef Il2CppArray *(*Type_GetGenericArguments_ftn)(void *, void *);
        //auto reflectionTypes = ((Type_GetGenericArguments_ftn) TypeGenericArguments->methodPointer)(
