@@ -133,26 +133,27 @@ std::string get_class_name(Il2CppType *ktype) {
        //   auto glass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
        //   extends.emplace_back(get_class_name(glass));
        //}
-       auto len =  ktype->data.generic_class->context.class_inst->type_argc;
+       //auto len =  ktype->data.generic_class->context.class_inst->type_argc;
        
-       for (int j = 0; j < len; ++j) {
-	    auto param_class = ktype->data.generic_class->context.class_inst->type_argv[j];
-	    extends.emplace_back(get_class_name((Il2CppType *)param_class));
-       }
+       //for (int j = 0; j < len; ++j) {
+       //    auto param_class = ktype->data.generic_class->context.class_inst->type_argv[j];
+       //    extends.emplace_back(get_class_name((Il2CppType *)param_class));
+       //}
        //while (auto itf = klass->generic_class->context.class_inst->type_argv) {
        //    auto param_class = il2cpp_class_from_type(itf);
        //   extends.emplace_back(get_class_name(param_class));
        //}
-       outPut << cname.substr(0, pos);
-       outPut << "<";
+       //outPut << cname.substr(0, pos);
+       //outPut << "<";
        //outPut << len;
+       outPut << il2cpp_type_get_name(ktype);
        if (!extends.empty()) {
          outPut << extends[0];
          for (int i = 1; i < extends.size(); ++i) {
             outPut << ", " << extends[i];
 	 }
        }
-       outPut << ">";
+       //outPut << ">";
         
     } else {
          outPut << il2cpp_class_get_name(klass);
