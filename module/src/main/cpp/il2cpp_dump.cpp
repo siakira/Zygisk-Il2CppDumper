@@ -237,15 +237,13 @@ std::string dump_property(Il2CppClass *klass) {
         auto prop_name = il2cpp_property_get_name(prop);
         outPut << "\t";
         Il2CppClass *prop_class = nullptr;
-	Il2CppType *prop_type = nullptr;
         uint32_t iflags = 0;
         if (get) {
             outPut << get_method_modifier(il2cpp_method_get_flags(get, &iflags));
-	    prop_type = (Il2CppType *)il2cpp_method_get_return_type(get);
-            prop_class = il2cpp_class_from_type(prop_type);
+            prop_class = il2cpp_class_from_type(il2cpp_method_get_return_type(get));
         } else if (set) {
             outPut << get_method_modifier(il2cpp_method_get_flags(set, &iflags));
-            prop_type = (Il2CppType *)il2cpp_method_get_param(set, 0);
+            auto prop_type = il2cpp_method_get_param(set, 0);
             prop_class = il2cpp_class_from_type(prop_type);
         }
         if (prop_class) {
