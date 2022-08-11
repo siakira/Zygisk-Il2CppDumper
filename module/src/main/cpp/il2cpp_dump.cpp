@@ -247,7 +247,7 @@ std::string dump_property(Il2CppClass *klass) {
             prop_class = il2cpp_class_from_type(prop_type);
         }
         if (prop_class) {
-            outPut << il2cpp_type_get_name(prop_type) << " " << prop_name << " { ";
+            outPut << il2cpp_class_get_name(prop_class) << " " << prop_name << " { ";
             if (get) {
                 outPut << "get; ";
             }
