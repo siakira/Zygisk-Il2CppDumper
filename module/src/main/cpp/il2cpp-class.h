@@ -12,9 +12,6 @@ typedef int32_t MethodIndex;
 typedef int32_t GenericMethodIndex;
 typedef int32_t PropertyIndex;
 typedef int32_t EventIndex;
-typedef int32_t GenericContainerIndex;
-typedef int32_t GenericParameterIndex;
-typedef int16_t GenericParameterConstraintIndex;
 typedef int32_t NestedTypeIndex;
 typedef int32_t InterfacesIndex;
 typedef int32_t VTableIndex;
@@ -224,7 +221,7 @@ typedef union Il2CppRGCTXData
 typedef struct Il2CppGenericInst
 {
  uint32_t type_argc;
- const Il2CppType **type_argv;
+ Il2CppType **type_argv;
 } Il2CppGenericInst;
 
 typedef struct Il2CppGenericContext
