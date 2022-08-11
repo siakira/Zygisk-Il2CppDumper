@@ -144,7 +144,7 @@ std::string get_class_name(Il2CppClass *klass) {
        //}
        outPut << cname.substr(0, pos);
        outPut << "<";
-       outPut << type->data->genericParameterIndex;
+       outPut << type->data.genericParameterIndex;
        //outPut << std::to_string(len);
        outPut << il2cpp_class_get_name(klass);
        //if (!extends.empty()) {
