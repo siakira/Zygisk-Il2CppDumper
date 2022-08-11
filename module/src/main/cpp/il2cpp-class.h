@@ -226,8 +226,8 @@ typedef struct Il2CppGenericInst
 
 typedef struct Il2CppGenericContext
 {
- const Il2CppGenericInst *class_inst;
- const Il2CppGenericInst *method_inst;
+  Il2CppGenericInst *class_inst;
+  Il2CppGenericInst *method_inst;
 } Il2CppGenericContext;
 
 typedef struct Il2CppGenericClass
