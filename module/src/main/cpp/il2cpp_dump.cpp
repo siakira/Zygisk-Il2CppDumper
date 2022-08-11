@@ -122,12 +122,12 @@ std::string get_class_name(Il2CppClass *klass) {
        //auto corlib = il2cpp_get_corlib();
        //auto TypeClass = il2cpp_class_from_name(corlib, "System", "Type");
        //auto TypeGenericArguments = il2cpp_class_get_method_from_name(TypeClass, "GetGenericArguments", 0);
-       auto pType = il2cpp_class_get_type(klass);
-       Il2CppGenericInst* pInst = pType->data.generic_class->context.class_inst;
-       for (int i = 0; i < pInst->type_argc; ++i)
-       {
-	    auto param_class = il2cpp_type_get_name(pInst->type_argv[i]);
-       }
+       //auto pType = il2cpp_class_get_type(klass);
+       //Il2CppGenericInst* pInst = pType->data.generic_class->context.class_inst;
+       //for (int i = 0; i < pInst->type_argc; ++i)
+       //{
+	//    auto param_class = il2cpp_type_get_name(pInst->type_argv[i]);
+       //}
        //typedef Il2CppArray *(*Type_GetGenericArguments_ftn)(void *, void *);
        //auto reflectionTypes = ((Type_GetGenericArguments_ftn) TypeGenericArguments->methodPointer)(
        //             (void*)type, nullptr);
@@ -149,7 +149,7 @@ std::string get_class_name(Il2CppClass *klass) {
        //}
        outPut << cname.substr(0, pos);
        outPut << "<";
-     
+       outPut << klass->genericContainerIndex;
        //outPut << std::to_string(len);
        outPut << il2cpp_class_get_name(klass);
        //if (!extends.empty()) {
