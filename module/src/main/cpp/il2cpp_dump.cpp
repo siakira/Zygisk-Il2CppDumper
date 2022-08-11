@@ -117,7 +117,7 @@ std::string get_class_name(Il2CppClass *klass) {
     std::stringstream outPut;
     auto cname = std::string(il2cpp_class_get_name(klass));
     auto pos = cname.rfind('`');
-    if(pos > 0) {
+    if(pos < str.length()) {
        std::vector<std::string> extends;
        //auto corlib = il2cpp_get_corlib();
        //auto TypeClass = il2cpp_class_from_name(corlib, "System", "Type");
@@ -132,12 +132,12 @@ std::string get_class_name(Il2CppClass *klass) {
        //   auto glass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
        //   extends.emplace_back(get_class_name(glass));
        //}
-       auto len =  klass->genericContainerIndex;
+       auto len =  klass->generic_class->context.class_inst->type_argc;
        
-       //for (int j = 0; j < len; ++j) {
-       //    auto param_class = ktype->data.generic_class->context.class_inst->type_argv[j];
-       //    extends.emplace_back(get_class_name((Il2CppType *)param_class));
-       //}
+       for (int j = 0; j < len; ++j) {
+           auto param_class = il2cpp_class_from_type(ktype->data.generic_class->context.class_inst->type_argv[j]);
+           extends.emplace_back(get_class_name(param_class));
+       }
        //while (auto itf = klass->generic_class->context.class_inst->type_argv) {
        //    auto param_class = il2cpp_class_from_type(itf);
        //   extends.emplace_back(get_class_name(param_class));
