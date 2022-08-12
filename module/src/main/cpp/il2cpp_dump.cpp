@@ -129,7 +129,7 @@ std::string get_class_name(Il2CppClass *klass) {
        auto items = reflectionTypes->vector;
        for (int j = 0; j < reflectionTypes->max_length; ++j) {
              auto plass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
-             extends.emplace_back(il2cpp_class_get_name(glass));
+             extends.emplace_back(il2cpp_class_get_name(plass));
         }
        //auto corlib = il2cpp_get_corlib();
        //auto TypeClass = il2cpp_class_from_name(corlib, "System", "Type");
