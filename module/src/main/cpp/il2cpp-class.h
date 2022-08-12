@@ -147,6 +147,17 @@ typedef struct Il2CppType {
     unsigned int pinned: 1;
 } Il2CppType;
 
+typedef struct PropertyInfo
+{
+ Il2CppClass *parent;
+ const char *name;
+ const MethodInfo *get;
+ const MethodInfo *set;
+ uint32_t attrs;
+ CustomAttributeIndex customAttributeIndex;
+ uint32_t token;
+} PropertyInfo;
+
 typedef struct MethodInfo {
     Il2CppMethodPointer methodPointer;
 } MethodInfo;
