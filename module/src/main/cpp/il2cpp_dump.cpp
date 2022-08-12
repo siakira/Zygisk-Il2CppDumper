@@ -119,8 +119,9 @@ std::string get_class_name(Il2CppClass *klass) {
     auto pos = cname.rfind('`');
     if(pos < cname.length()) {
        std::vector<std::string> extends;
+       //auto ptype = il2cpp_class_get_type(klass);
        /*
-       auto ptype = il2cpp_class_get_type(klass);
+       
        auto corlib = il2cpp_get_corlib();
        auto assemblyClass = il2cpp_class_from_name(corlib, "System.Reflection", "Assembly");
        auto assemblyLoad = il2cpp_class_get_method_from_name(assemblyClass, "Load", 1);
