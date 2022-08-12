@@ -119,6 +119,17 @@ std::string get_class_name(Il2CppClass *klass) {
     auto pos = cname.rfind('`');
     if(pos < cname.length()) {
        std::vector<std::string> extends;
+       auto ptype = il2cpp_class_get_type(klass);
+       auto typeClass = il2cpp_class_from_name(corlib, "System", "Type");
+       auto TypeArguments = il2cpp_class_get_property_from_name(typeClass, "GenericTypeArguments");
+       typedef Il2CppArray *(*Type_GetTypes_ftn)(void *, void *);
+       auto reflectionTypes = ((Type_GetTypes_ftn) TypeArguments->get->methodPointer)(
+                    ptype, nullptr);
+       auto items = reflectionTypes->vector;
+       for (int j = 0; j < reflectionTypes->max_length; ++j) {
+             auto plass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
+             extends.emplace_back(il2cpp_class_get_name(glass));
+        }
        //auto corlib = il2cpp_get_corlib();
        //auto TypeClass = il2cpp_class_from_name(corlib, "System", "Type");
        //auto TypeGenericArguments = il2cpp_class_get_method_from_name(TypeClass, "GetGenericArguments", 0);
