@@ -119,7 +119,7 @@ std::string get_class_name(Il2CppClass *klass) {
     auto pos = cname.rfind('`');
     if(pos < cname.length()) {
        std::vector<std::string> extends;
-       //auto ptype = il2cpp_class_get_type(klass);
+       auto ptype = il2cpp_class_get_type(klass);
        /*
        
        auto corlib = il2cpp_get_corlib();
@@ -197,7 +197,7 @@ std::string get_class_name(Il2CppClass *klass) {
        //}
        outPut << cname.substr(0, pos);
        outPut << "<";
-       outPut << klass->genericContainerIndex;
+       outPut << ptype->data.genericParameterIndex;
        //outPut << std::to_string(len);
        //if (!extends.empty()) {
        //  outPut << extends[0];
