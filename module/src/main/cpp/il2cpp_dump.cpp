@@ -113,12 +113,13 @@ bool _il2cpp_type_is_byref(const Il2CppType *type) {
     }
     return byref;
 }
-std::string get_class_name(Il2CppClass *plass,Il2CppClass *klass,const char *str) {
+std::string get_class_name(Il2CppClass *klass) {
     std::stringstream outPut;
     auto cname = std::string(il2cpp_class_get_name(klass));
     auto pos = cname.rfind('`');
     if(pos < cname.length()) {
        std::vector<std::string> extends;
+       /*
        auto ptype = il2cpp_class_get_type(klass);
        auto corlib = il2cpp_get_corlib();
        auto assemblyClass = il2cpp_class_from_name(corlib, "System.Reflection", "Assembly");
@@ -144,6 +145,7 @@ std::string get_class_name(Il2CppClass *plass,Il2CppClass *klass,const char *str
 	auto reflectionAssembly = ((Assembly_Load_ftn) assemblyLoad->methodPointer)(nullptr,
                                                                                         assemblyFileName,
                                                                                         nullptr);
+	*/
 	//typedef void *(*Assembly_GetType_ftn)(void *, Il2CppString *, void *);
 	//auto reflectionType = ((*Assembly_GetType_ftn) assemblyGetType->methodPointer)(
         //            reflectionAssembly, il2cpp_string_new(namespacename.c_str()),nullptr);
@@ -297,7 +299,7 @@ std::string dump_property(Il2CppClass *klass) {
             prop_class = il2cpp_class_from_type(prop_type);
         }
         if (prop_class) {
-            outPut << get_class_name(klass,prop_class,prop_name) << " " << prop_name << " { ";
+            outPut << get_class_name(klass) << " " << prop_name << " { ";
             if (get) {
                 outPut << "get; ";
             }
