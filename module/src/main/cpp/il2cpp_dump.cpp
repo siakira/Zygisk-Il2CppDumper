@@ -198,7 +198,6 @@ std::string get_class_name(Il2CppClass *klass) {
        outPut << "<";
        outPut << klass->genericContainerIndex;
        //outPut << std::to_string(len);
-       outPut << il2cpp_class_get_name(klass);
        //if (!extends.empty()) {
        //  outPut << extends[0];
        //  for (int i = 1; i < extends.size(); ++i) {
