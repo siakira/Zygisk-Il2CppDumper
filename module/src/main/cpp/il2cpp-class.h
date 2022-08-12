@@ -147,6 +147,10 @@ typedef struct Il2CppType {
     unsigned int pinned: 1;
 } Il2CppType;
 
+typedef struct MethodInfo {
+    Il2CppMethodPointer methodPointer;
+} MethodInfo;
+
 typedef struct PropertyInfo
 {
  Il2CppClass *parent;
@@ -158,9 +162,7 @@ typedef struct PropertyInfo
  uint32_t token;
 } PropertyInfo;
 
-typedef struct MethodInfo {
-    Il2CppMethodPointer methodPointer;
-} MethodInfo;
+
 
 typedef struct Il2CppObject {
     union {
