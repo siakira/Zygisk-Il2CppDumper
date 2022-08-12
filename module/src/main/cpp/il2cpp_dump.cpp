@@ -113,7 +113,7 @@ bool _il2cpp_type_is_byref(const Il2CppType *type) {
     }
     return byref;
 }
-std::string get_class_name(Il2CppClass *klass) {
+std::string get_class_name(Il2CppClass *plass,Il2CppClass *klass,const char *str) {
     std::stringstream outPut;
     auto cname = std::string(il2cpp_class_get_name(klass));
     auto pos = cname.rfind('`');
@@ -121,16 +121,49 @@ std::string get_class_name(Il2CppClass *klass) {
        std::vector<std::string> extends;
        auto ptype = il2cpp_class_get_type(klass);
        auto corlib = il2cpp_get_corlib();
+       auto assemblyClass = il2cpp_class_from_name(corlib, "System.Reflection", "Assembly");
+       auto assemblyLoad = il2cpp_class_get_method_from_name(assemblyClass, "Load", 1);
+       auto assemblyGetType = il2cpp_class_get_method_from_name(assemblyClass, "GetType", 1);
        auto typeClass = il2cpp_class_from_name(corlib, "System", "Type");
        auto TypeArguments = il2cpp_class_get_property_from_name(typeClass, "GenericTypeArguments");
-       typedef Il2CppArray *(*Type_GetTypes_ftn)(const Il2CppType *, void *);
-       auto reflectionTypes = ((Type_GetTypes_ftn) TypeArguments->get->methodPointer)(
-                    ptype, nullptr);
-       auto items = reflectionTypes->vector;
-       for (int j = 0; j < reflectionTypes->max_length; ++j) {
-             auto plass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
-             extends.emplace_back(il2cpp_class_get_name(plass));
-        }
+       auto property = il2cpp_class_get_method_from_name(typeClass, "GetProperty", 1);
+       auto PropertyClass = il2cpp_class_from_name(corlib, "System.Reflection", "PropertyInfo");
+       auto PropertyType = il2cpp_class_get_property_from_name(PropertyClass, "PropertyType");	    
+       	auto image = il2cpp_class_get_image(plass)
+	auto image_name = il2cpp_image_get_name(image);
+	auto imageName = std::string(image_name);
+	auto pos = imageName.rfind('.');
+        auto imageNameNoExt = imageName.substr(0, pos);
+	auto assemblyFileName = il2cpp_string_new(imageNameNoExt.c_str());
+	auto class_name = il2cpp_class_get_name(plass);
+	auto namespace_name = il2cpp_class_get_namespace(plass);
+	auto classname = std::string(class_name);
+	auto namespacename = std::string(namespace_name);
+        namespacename.append(classname);
+	typedef void *(*Assembly_Load_ftn)(void *, Il2CppString *, void *);
+	auto reflectionAssembly = ((Assembly_Load_ftn) assemblyLoad->methodPointer)(nullptr,
+                                                                                        assemblyFileName,
+                                                                                        nullptr);
+	//typedef void *(*Assembly_GetType_ftn)(void *, Il2CppString *, void *);
+	//auto reflectionType = ((*Assembly_GetType_ftn) assemblyGetType->methodPointer)(
+        //            reflectionAssembly, il2cpp_string_new(namespacename.c_str()),nullptr);
+	
+	//typedef void *(*Type_property_ftn)(void *, Il2CppString *, void *);
+	//auto Typeproperty = ((*Type_property_ftn) property->methodPointer)(
+        //            reflectionType, il2cpp_string_new(str),nullptr);
+	//typedef void *(*Property_type_ftn)(void *, void *);
+	//auto PropertyType = ((Property_type_ftn) PropertyType->get->methodPointer)(
+        //            Typeproperty, nullptr);
+	    
+      // typedef Il2CppArray *(*Type_GetTypes_ftn)(void *, void *);
+       //auto reflectionTypes = ((Type_GetTypes_ftn) TypeArguments->get->methodPointer)(
+        //            PropertyType, nullptr);
+       //auto items = reflectionTypes->vector;
+       //for (int j = 0; j < reflectionTypes->max_length; ++j) {
+       //      auto plass = il2cpp_class_from_system_type((Il2CppReflectionType *) items[j]);
+       //      extends.emplace_back(il2cpp_class_get_name(plass));
+        //}
+	 
        //auto corlib = il2cpp_get_corlib();
        //auto TypeClass = il2cpp_class_from_name(corlib, "System", "Type");
        //auto TypeGenericArguments = il2cpp_class_get_method_from_name(TypeClass, "GetGenericArguments", 0);
@@ -264,7 +297,7 @@ std::string dump_property(Il2CppClass *klass) {
             prop_class = il2cpp_class_from_type(prop_type);
         }
         if (prop_class) {
-            outPut << get_class_name(prop_class) << " " << prop_name << " { ";
+            outPut << get_class_name(klass,prop_class,prop_name) << " " << prop_name << " { ";
             if (get) {
                 outPut << "get; ";
             }
