@@ -123,7 +123,7 @@ std::string get_class_name(Il2CppClass *klass) {
        auto corlib = il2cpp_get_corlib();
        auto typeClass = il2cpp_class_from_name(corlib, "System", "Type");
        auto TypeArguments = il2cpp_class_get_property_from_name(typeClass, "GenericTypeArguments");
-       typedef Il2CppArray *(*Type_GetTypes_ftn)(void *, void *);
+       typedef Il2CppArray *(*Type_GetTypes_ftn)(const Il2CppType *, void *);
        auto reflectionTypes = ((Type_GetTypes_ftn) TypeArguments->get->methodPointer)(
                     ptype, nullptr);
        auto items = reflectionTypes->vector;
