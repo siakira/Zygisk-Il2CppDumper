@@ -371,6 +371,7 @@ std::string dump_type(const Il2CppType *type) {
     std::stringstream outPut;
     auto *klass = il2cpp_class_from_type(type);
     outPut << "\n// Namespace: " << il2cpp_class_get_namespace(klass) << "\n";
+    outPut << "\n// TypeDefinitionInde: " << type->data.klassIndex << "\n";
     auto flags = il2cpp_class_get_flags(klass);
     if (flags & TYPE_ATTRIBUTE_SERIALIZABLE) {
         outPut << "[Serializable]\n";
