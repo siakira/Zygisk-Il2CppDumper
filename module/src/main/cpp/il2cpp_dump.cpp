@@ -129,7 +129,7 @@ std::string get_class_name(Il2CppClass *plass,Il2CppClass *klass,const char *str
        auto property = il2cpp_class_get_method_from_name(typeClass, "GetProperty", 1);
        auto PropertyClass = il2cpp_class_from_name(corlib, "System.Reflection", "PropertyInfo");
        auto PropertyType = il2cpp_class_get_property_from_name(PropertyClass, "PropertyType");	    
-       	auto image = il2cpp_class_get_image(plass)
+       	auto image = il2cpp_class_get_image(plass);
 	auto image_name = il2cpp_image_get_name(image);
 	auto imageName = std::string(image_name);
 	auto pos = imageName.rfind('.');
