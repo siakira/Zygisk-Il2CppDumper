@@ -120,6 +120,7 @@ std::string get_class_name(Il2CppClass *klass) {
     if(pos < cname.length()) {
        std::vector<std::string> extends;
        auto ptype = il2cpp_class_get_type(klass);
+       auto corlib = il2cpp_get_corlib();
        auto typeClass = il2cpp_class_from_name(corlib, "System", "Type");
        auto TypeArguments = il2cpp_class_get_property_from_name(typeClass, "GenericTypeArguments");
        typedef Il2CppArray *(*Type_GetTypes_ftn)(void *, void *);
