@@ -366,8 +366,7 @@ std::string dump_field(Il2CppClass *klass) {
         if (attrs & FIELD_ATTRIBUTE_LITERAL & is_string) {
             char *ca;
             il2cpp_field_static_get_value(field, &ca);
-	    auto ca1 = std::string(ca);
-            outPut << " = " << ca1.str();
+            outPut << " = " << ca;
 
          } else if (attrs & FIELD_ATTRIBUTE_LITERAL) {
 	    uint64_t val = 0;
