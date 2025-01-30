@@ -39,6 +39,7 @@ void hack_start(const char *game_data_dir) {
 }
 void hack_thread(){
     LOGI("hack Start");
+    size_t size;
     auto domain = il2cpp_domain_get();
     auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
     auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
