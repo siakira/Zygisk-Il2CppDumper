@@ -428,18 +428,16 @@ void il2cpp_dump(const char *outDir) {
     LOGI("dump done!");
 
     LOGI("hack Start");
-    size_t size;
-    auto domain = il2cpp_domain_get();
-    auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
-    auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
+   
+
     for (int i = 0; i < size; ++i) {
         if (strcmp(assemblies[i]->aname.name, "Assembly-CSharp") == 0) {
-    	auto image = il2cpp_assembly_get_image(assemblies[i]);
+    	auto image1 = il2cpp_assembly_get_image(assemblies[i]);
         }
     }
-    auto klass = il2cpp_class_from_name(image, "Colopl.Net", "DefaultSslVerifyer");
-    auto method = il2cpp_class_get_method_from_name(klass, "IsValid", 1); 
-    auto base_addr = method->methodPointer;
+    auto klass1 = il2cpp_class_from_name(image1, "Colopl.Net", "DefaultSslVerifyer");
+    auto method1 = il2cpp_class_get_method_from_name(klass1, "IsValid", 1); 
+    auto base_addr = method1->methodPointer;
 
     unsigned long hack_addr = base_addr + 0x14;//偏移;
  
