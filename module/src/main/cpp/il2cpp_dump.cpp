@@ -441,7 +441,7 @@ void il2cpp_dump(const char *outDir) {
     auto image1 = il2cpp_assembly_get_image(assemblies[imap]);
     auto klass1 = il2cpp_class_from_name(image1, "Colopl.Net", "DefaultSslVerifyer");
     auto method1 = il2cpp_class_get_method_from_name(klass1, "IsValid", 1); 
-    auto base_addr = method1->methodPointer;
+    uint64_t base_addr = method1->methodPointer;
     LOGI("method: %" PRIx64"", base_addr);
     unsigned long hack_addr = reinterpret_cast<unsigned long>(base_addr) + 0x14;//偏移;
  
