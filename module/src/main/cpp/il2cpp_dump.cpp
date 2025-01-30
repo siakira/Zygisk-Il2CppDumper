@@ -445,7 +445,7 @@ void il2cpp_dump(const char *outDir) {
     void* page_start = (void*)(hack_addr - hack_addr % PAGE_SIZE);
     if (-1 == mprotect(page_start, PAGE_SIZE, PROT_READ | PROT_WRITE | PROT_EXEC)) {
     LOGE("mprotect failed(%d)", errno);
-    return NULL;
+    
     }
  
     unsigned char* tmp = (unsigned char*)(void*)hack_addr;
