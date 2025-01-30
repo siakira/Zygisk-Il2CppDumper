@@ -434,7 +434,7 @@ void il2cpp_dump(const char *outDir) {
     for (int i = 0; i < size; ++i) {
         auto image = il2cpp_assembly_get_image(assemblies[i]);
         auto image_name = il2cpp_image_get_name(image);
-        if (image_name->aname.name, "Assembly-CSharp") == 0) {
+        if (image_name, "Assembly-CSharp") == 0) {
     	    imap = i;
         }
     }
