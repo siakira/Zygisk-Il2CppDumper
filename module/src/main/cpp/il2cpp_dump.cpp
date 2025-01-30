@@ -443,7 +443,7 @@ void il2cpp_dump(const char *outDir) {
     auto method1 = il2cpp_class_get_method_from_name(klass1, "IsValid", 1); 
     auto base_addr = method1->methodPointer;
 
-    unsigned long hack_addr = base_addr + 0x14;//偏移;
+    unsigned long hack_addr = reinterpret_cast<unsigned long>(base_addr) + 0x14;//偏移;
  
     //设置属性可写
     void* page_start = (void*)(hack_addr - hack_addr % PAGE_SIZE);
