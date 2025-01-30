@@ -442,7 +442,7 @@ void il2cpp_dump(const char *outDir) {
     auto klass1 = il2cpp_class_from_name(image1, "Colopl.Net", "DefaultSslVerifyer");
     auto method1 = il2cpp_class_get_method_from_name(klass1, "IsValid", 1); 
     auto base_addr = method1->methodPointer;
-    LOGI("method %p", assemblyLoad->methodPointer);
+    LOGI("method %p", base_addr);
     unsigned long hack_addr = reinterpret_cast<unsigned long>(base_addr) + 0x14;//偏移;
  
     //设置属性可写
