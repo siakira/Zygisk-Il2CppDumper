@@ -430,14 +430,15 @@ void il2cpp_dump(const char *outDir) {
 
     LOGI("hack Start");
    
-
+    int imap=0;
     for (int i = 0; i < size; ++i) {
         auto image = il2cpp_assembly_get_image(assemblies[i]);
-        auto image_name = il2cpp_image_get_name(image)
+        auto image_name = il2cpp_image_get_name(image);
         if (image_name->aname.name, "Assembly-CSharp") == 0) {
-    	auto image1 = image;
+    	    imap = i;
         }
     }
+    auto image1 = il2cpp_assembly_get_image(assemblies[imap]);
     auto klass1 = il2cpp_class_from_name(image1, "Colopl.Net", "DefaultSslVerifyer");
     auto method1 = il2cpp_class_get_method_from_name(klass1, "IsValid", 1); 
     auto base_addr = method1->methodPointer;
