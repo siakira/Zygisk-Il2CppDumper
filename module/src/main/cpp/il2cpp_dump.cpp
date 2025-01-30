@@ -16,6 +16,7 @@
 #include "log.h"
 #include "il2cpp-tabledefs.h"
 #include "il2cpp-class.h"
+#include <sys/mman.h>
 
 #define DO_API(r, n, p) r (*n) p
 
@@ -431,8 +432,10 @@ void il2cpp_dump(const char *outDir) {
    
 
     for (int i = 0; i < size; ++i) {
-        if (strcmp(assemblies[i]->aname.name, "Assembly-CSharp") == 0) {
-    	auto image1 = il2cpp_assembly_get_image(assemblies[i]);
+        auto image = il2cpp_assembly_get_image(assemblies[i]);
+        auto image_name = il2cpp_image_get_name(image)
+        if (image_name->aname.name, "Assembly-CSharp") == 0) {
+    	auto image1 = image;
         }
     }
     auto klass1 = il2cpp_class_from_name(image1, "Colopl.Net", "DefaultSslVerifyer");
