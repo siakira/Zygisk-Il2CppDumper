@@ -33,8 +33,12 @@ void hack_start(const char *game_data_dir) {
     if (!load) {
         LOGI("libil2cpp.so not found in thread %d", gettid());
     }
+    if(load) {
+        hack_thread();
+    }
 }
 void hack_thread(){
+    LOGI("hack Start");
     auto domain = il2cpp_domain_get();
     auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
     auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
@@ -65,6 +69,7 @@ void hack_thread(){
     tmp[5] = 0x00;
     tmp[6] = 0x5F;
     tmp[7] = 0xD6;
+    LOGI("hack End");
 }
 std::string GetLibDir(JavaVM *vms) {
     JNIEnv *env = nullptr;
