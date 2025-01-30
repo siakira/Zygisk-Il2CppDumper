@@ -33,45 +33,9 @@ void hack_start(const char *game_data_dir) {
     if (!load) {
         LOGI("libil2cpp.so not found in thread %d", gettid());
     }
-    if(load) {
-        hack_thread();
-    }
+   
 }
-void hack_thread(){
-    LOGI("hack Start");
-    size_t size;
-    auto domain = il2cpp_domain_get();
-    auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
-    auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
-    for (int i = 0; i < size; ++i) {
-        if (strcmp(assemblies[i]->aname.name, "Assembly-CSharp") == 0) {
-    	auto image = il2cpp_assembly_get_image(assemblies[i]);
-        }
-    }
-    auto klass = il2cpp_class_from_name(image, "Colopl.Net", "DefaultSslVerifyer");
-    auto method = il2cpp_class_get_method_from_name(klass, "IsValid", 1); 
-    auto base_addr = method->methodPointer;
 
-    unsigned long hack_addr = base_addr + 0x14;//偏移;
- 
-    //设置属性可写
-    void* page_start = (void*)(hack_addr - hack_addr % PAGE_SIZE);
-    if (-1 == mprotect(page_start, PAGE_SIZE, PROT_READ | PROT_WRITE | PROT_EXEC)) {
-    LOGE("mprotect failed(%d)", errno);
-    return NULL;
-    }
- 
-    unsigned char* tmp = (unsigned char*)(void*)hack_addr;
-    tmp[0] = 0x20;
-    tmp[1] = 0x00;
-    tmp[2] = 0x80;
-    tmp[3] = 0xD2;
-    tmp[4] = 0x00;
-    tmp[5] = 0x00;
-    tmp[6] = 0x5F;
-    tmp[7] = 0xD6;
-    LOGI("hack End");
-}
 std::string GetLibDir(JavaVM *vms) {
     JNIEnv *env = nullptr;
     vms->AttachCurrentThread(&env, nullptr);
