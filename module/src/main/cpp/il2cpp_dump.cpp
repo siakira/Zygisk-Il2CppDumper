@@ -350,6 +350,9 @@ void il2cpp_dump(const char *outDir) {
     auto domain = il2cpp_domain_get();
     auto assemblies = il2cpp_domain_get_assemblies(domain, &size);
     std::stringstream imageOutput;
+    imageOutput << "// il2cpp_base: 0x";
+    imageOutput << std::hex << il2cpp_base;
+    imageOutput << "\n";
     for (int i = 0; i < size; ++i) {
         auto image = il2cpp_assembly_get_image(assemblies[i]);
         imageOutput << "// Image " << i << ": " << il2cpp_image_get_name(image) << "\n";
