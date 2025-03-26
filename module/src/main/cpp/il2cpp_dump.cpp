@@ -427,7 +427,7 @@ void il2cpp_dump(const char *outDir) {
     }
     outStream.close();
     LOGI("dump done!");
-
+/*
     LOGI("hack Start");
    
     int imap=0;
@@ -463,4 +463,5 @@ void il2cpp_dump(const char *outDir) {
     tmp[2] = 0x5F;
     tmp[3] = 0xD6;
     LOGI("hack End");
+    */
 }
