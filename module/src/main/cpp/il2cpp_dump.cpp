@@ -430,6 +430,25 @@ void il2cpp_dump(const char *outDir) {
     }
     outStream.close();
     LOGI("dump done!");
+    LOGI("hack Start");
+    unsigned long hack_addr = reinterpret_cast<unsigned long>(il2cpp_base);
+    auto hack_size = (size_t)0x8FD4000;
+     void* page_start = (void*)(hack_addr);
+    if (-1 == mprotect(page_start, hack_size, PROT_READ | PROT_WRITE | PROT_EXEC)) {
+    LOGE("mprotect failed(%d)", errno);
+    
+    }
+   
+    auto byte_stream = std::span<const std::byte>(
+            static_cast<const std::byte*>(page_start),
+            hack_size
+        );
+    auto dump_outPath = std::string(outDir).append("/files/dumpcpp.so");
+    std::ofstream ofs(dump_outPath, std::ios::binary | std::ios::trunc);
+    ofs.write(reinterpret_cast<const char*>(byte_stream.data()), 
+    static_cast<std::streamsize>(byte_stream.size()));
+    ofs.close();
+    LOGI("hack End");
 /*
     LOGI("hack Start");
    
