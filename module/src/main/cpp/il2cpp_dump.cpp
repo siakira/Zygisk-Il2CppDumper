@@ -438,15 +438,12 @@ void il2cpp_dump(const char *outDir) {
     LOGE("mprotect failed(%d)", errno);
     
     }
-   
-    auto byte_stream = std::span<const std::byte>(
-            static_cast<const std::byte*>(page_start),
-            hack_size
-        );
+   const char* byte_stream = static_cast<const char*>(page_start);
+  
     auto dump_outPath = std::string(outDir).append("/files/dumpcpp.so");
     std::ofstream ofs(dump_outPath, std::ios::binary | std::ios::trunc);
-    ofs.write(reinterpret_cast<const char*>(byte_stream.data()), 
-    static_cast<std::streamsize>(byte_stream.size()));
+    ofs.write(byte_stream, static_cast<std::streamsize>(hack_size));
+  
     ofs.close();
     LOGI("hack End");
 /*
