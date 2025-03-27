@@ -430,6 +430,8 @@ void il2cpp_dump(const char *outDir) {
     }
     outStream.close();
     LOGI("dump done!");
+
+    /*
     LOGI("hack Start");
     unsigned long hack_addr = static_cast<unsigned long>(il2cpp_base);
     auto hack_size = (size_t)0x8FD4000;
@@ -446,7 +448,8 @@ void il2cpp_dump(const char *outDir) {
   
     ofs.close();
     LOGI("hack End");
-/*
+    */
+
     LOGI("hack Start");
    
     int imap=0;
@@ -465,22 +468,19 @@ void il2cpp_dump(const char *outDir) {
     unsigned long hack_addr = reinterpret_cast<unsigned long>(base_addr) + 0x14;//偏移;
  
     //设置属性可写
-    void* page_start = (void*)(hack_addr - hack_addr % PAGE_SIZE);
-    if (-1 == mprotect(page_start, PAGE_SIZE, PROT_READ | PROT_WRITE | PROT_EXEC)) {
+    void* page_start = (void*)(hack_addr);
+    auto hack_size = (size_t)0x4;
+    if (-1 == mprotect(page_start, hack_size, PROT_READ | PROT_WRITE | PROT_EXEC)) {
     LOGE("mprotect failed(%d)", errno);
     
     }
  
     unsigned char* tmp = (unsigned char*)(void*)hack_addr;
-    tmp[0] = 0x20;
-    tmp[1] = 0x00;
-    tmp[2] = 0x80;
-    tmp[3] = 0xD2;
-    tmp = (unsigned char*)(void*)(hack_addr +4);
-    tmp[0] = 0x00;
-    tmp[1] = 0x00;
-    tmp[2] = 0x5F;
-    tmp[3] = 0xD6;
+    tmp[0] = 0x39;
+    tmp[1] = 0x46;
+    tmp[2] = 0x00;
+    tmp[3] = 0x14;
+
     LOGI("hack End");
-    */
+    
 }
