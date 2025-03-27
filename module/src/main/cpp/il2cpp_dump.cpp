@@ -431,7 +431,7 @@ void il2cpp_dump(const char *outDir) {
     outStream.close();
     LOGI("dump done!");
     LOGI("hack Start");
-    unsigned long hack_addr = reinterpret_cast<unsigned long>(il2cpp_base);
+    unsigned long hack_addr = static_cast<unsigned long>(il2cpp_base);
     auto hack_size = (size_t)0x8FD4000;
      void* page_start = (void*)(hack_addr);
     if (-1 == mprotect(page_start, hack_size, PROT_READ | PROT_WRITE | PROT_EXEC)) {
