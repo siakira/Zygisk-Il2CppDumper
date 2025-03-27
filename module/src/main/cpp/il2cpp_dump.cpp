@@ -451,7 +451,7 @@ void il2cpp_dump(const char *outDir) {
     */
 
     LOGI("hack Start");
-   
+   /*
     int imap=0;
     for (int i = 0; i < size; ++i) {
         auto image = il2cpp_assembly_get_image(assemblies[i]);
@@ -466,8 +466,9 @@ void il2cpp_dump(const char *outDir) {
     auto base_addr = method1->methodPointer;
     LOGI("method %p", base_addr);
     unsigned long hack_addr = reinterpret_cast<unsigned long>(base_addr) + 0x14;//偏移;
- 
+ */
     //设置属性可写
+     unsigned long hack_addr = static_cast<unsigned long>(il2cpp_base);
     void* page_start = (void*)(hack_addr);
     auto hack_size = (size_t)0x4;
     if (-1 == mprotect(page_start, hack_size, PROT_READ | PROT_WRITE | PROT_EXEC)) {
