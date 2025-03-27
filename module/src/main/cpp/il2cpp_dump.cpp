@@ -451,7 +451,7 @@ void il2cpp_dump(const char *outDir) {
     */
 
     LOGI("hack Start");
-   /*
+   
     int imap=0;
     for (int i = 0; i < size; ++i) {
         auto image = il2cpp_assembly_get_image(assemblies[i]);
@@ -461,17 +461,16 @@ void il2cpp_dump(const char *outDir) {
         }
     }
     auto image1 = il2cpp_assembly_get_image(assemblies[imap]);
-    auto klass1 = il2cpp_class_from_name(image1, "Colopl.Net", "DefaultSslVerifyer");
-    auto method1 = il2cpp_class_get_method_from_name(klass1, "IsValid", 1); 
+    auto klass1 = il2cpp_class_from_name(image1, "A2.Http", "RequestEncoder");
+    auto method1 = il2cpp_class_get_method_from_name(klass1, "EncodeRequetContainer", 0); 
     auto base_addr = method1->methodPointer;
     LOGI("method %p", base_addr);
-    unsigned long hack_addr = reinterpret_cast<unsigned long>(base_addr) + 0x14;//偏移;
- */
+    unsigned long hack_addr = reinterpret_cast<unsigned long>(base_addr) + 0x11C;//偏移;
+ 
     //设置属性可写
-     unsigned long hack_addr = static_cast<unsigned long>(il2cpp_base) + 0x3CCC370;//偏移;
-    void* page_start = (void*)(hack_addr);
-    auto hack_size = (size_t)0x4;
-    if (-1 == mprotect(page_start, hack_size, PROT_READ | PROT_WRITE | PROT_EXEC)) {
+    
+     void* page_start = (void*)(hack_addr - hack_addr % PAGE_SIZE);
+    if (-1 == mprotect(page_start, PAGE_SIZE, PROT_READ | PROT_WRITE | PROT_EXEC)) {
     LOGE("mprotect failed(%d)", errno);
     
     }
