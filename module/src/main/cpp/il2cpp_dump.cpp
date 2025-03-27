@@ -439,8 +439,8 @@ void il2cpp_dump(const char *outDir) {
     
     }
    const char* byte_stream = static_cast<const char*>(page_start);
-  
-    auto dump_outPath = std::string(outDir).append("/files/dumpcpp.so");
+    auto path_adr = std::format("/files/dumpcpp0x%"PRIX64".so", il2cpp_base);
+    auto dump_outPath = std::string(outDir) + path_adr;
     std::ofstream ofs(dump_outPath, std::ios::binary | std::ios::trunc);
     ofs.write(byte_stream, static_cast<std::streamsize>(hack_size));
   
