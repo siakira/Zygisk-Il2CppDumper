@@ -468,7 +468,7 @@ void il2cpp_dump(const char *outDir) {
     unsigned long hack_addr = reinterpret_cast<unsigned long>(base_addr) + 0x14;//偏移;
  */
     //设置属性可写
-     unsigned long hack_addr = static_cast<unsigned long>(il2cpp_base);
+     unsigned long hack_addr = static_cast<unsigned long>(il2cpp_base) + 0x3CCC370;//偏移;
     void* page_start = (void*)(hack_addr);
     auto hack_size = (size_t)0x4;
     if (-1 == mprotect(page_start, hack_size, PROT_READ | PROT_WRITE | PROT_EXEC)) {
