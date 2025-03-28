@@ -465,7 +465,7 @@ void il2cpp_dump(const char *outDir) {
     auto method1 = il2cpp_class_get_method_from_name(klass1, "EncodeRequetContainer", 0); 
     auto base_addr = method1->methodPointer;
     LOGI("method %p", base_addr);
-    unsigned long hack_addr = reinterpret_cast<unsigned long>(base_addr) + 0x11C;//偏移;
+    unsigned long hack_addr = reinterpret_cast<unsigned long>(base_addr) + 0x12C;//偏移;
  
     //设置属性可写
     
@@ -476,10 +476,10 @@ void il2cpp_dump(const char *outDir) {
     }
  
     unsigned char* tmp = (unsigned char*)(void*)hack_addr;
-    tmp[0] = 0x39;
-    tmp[1] = 0x46;
-    tmp[2] = 0x00;
-    tmp[3] = 0x14;
+    tmp[0] = 0x20;
+    tmp[1] = 0x00;
+    tmp[2] = 0x5F;
+    tmp[3] = 0xD6;
 
     LOGI("hack End");
     
