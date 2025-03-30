@@ -477,9 +477,9 @@ void il2cpp_dump(const char *outDir) {
     }
  
     unsigned char* tmp = (unsigned char*)(void*)hack_addr;
-    tmp[0] = 0x3E;
-    tmp[1] = 0xD6;
-    tmp[2] = 0x00;
+    tmp[0] = 0xC1;
+    tmp[1] = 0xC8;
+    tmp[2] = 0x15;
     tmp[3] = 0x94;
 
 
