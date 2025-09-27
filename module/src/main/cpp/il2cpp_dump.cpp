@@ -467,7 +467,7 @@ void il2cpp_dump(const char *outDir) {
     LOGI("method %p", base_addr);
     unsigned long hack_addr = reinterpret_cast<unsigned long>(base_addr) + 0x3C;//偏移;
     */
-    unsigned long hack_addr = static_cast<unsigned long>(il2cpp_base) +0x745E008
+    unsigned long hack_addr = static_cast<unsigned long>(il2cpp_base) +0x745E008;
     //设置属性可写
     
      void* page_start = (void*)(hack_addr - hack_addr % PAGE_SIZE);
